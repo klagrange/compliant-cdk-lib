@@ -35,6 +35,7 @@ class HookHandlerRequest(BaseHookHandlerRequest):
 
 @dataclass
 class TypeConfigurationModel(BaseModel):
+    EncryptionAlgorithm: Optional[str]
 
     @classmethod
     def _deserialize(
@@ -43,7 +44,9 @@ class TypeConfigurationModel(BaseModel):
     ) -> Optional["_TypeConfigurationModel"]:
         if not json_data:
             return None
-        return cls()
+        return cls(
+            EncryptionAlgorithm=json_data.get("EncryptionAlgorithm"),
+        )
 
 
 # work around possible type aliasing issues when variable has same name as a model

@@ -30,33 +30,33 @@ def set_or_none(value: Optional[Sequence[T]]) -> Optional[AbstractSet[T]]:
 
 @dataclass
 class AwsS3Bucket(BaseModel):
-    AccelerateConfiguration: Optional["_AccelerateConfiguration"]
+    InventoryConfigurations: Optional[Sequence["_InventoryConfiguration"]]
+    WebsiteConfiguration: Optional["_WebsiteConfiguration"]
+    DualStackDomainName: Optional[str]
     AccessControl: Optional[str]
     AnalyticsConfigurations: Optional[Sequence["_AnalyticsConfiguration"]]
-    BucketEncryption: Optional["_BucketEncryption"]
+    AccelerateConfiguration: Optional["_AccelerateConfiguration"]
+    PublicAccessBlockConfiguration: Optional["_PublicAccessBlockConfiguration"]
     BucketName: Optional[str]
-    CorsConfiguration: Optional["_CorsConfiguration"]
+    RegionalDomainName: Optional[str]
+    OwnershipControls: Optional["_OwnershipControls"]
+    ObjectLockConfiguration: Optional["_ObjectLockConfiguration"]
+    ObjectLockEnabled: Optional[bool]
+    LoggingConfiguration: Optional["_LoggingConfiguration"]
+    ReplicationConfiguration: Optional["_ReplicationConfiguration"]
+    Tags: Optional[Any]
+    DomainName: Optional[str]
+    BucketEncryption: Optional["_BucketEncryption"]
+    WebsiteURL: Optional[str]
+    NotificationConfiguration: Optional["_NotificationConfiguration"]
+    LifecycleConfiguration: Optional["_LifecycleConfiguration"]
+    VersioningConfiguration: Optional["_VersioningConfiguration"]
+    MetricsConfigurations: Optional[Sequence["_MetricsConfiguration"]]
     IntelligentTieringConfigurations: Optional[
         Sequence["_IntelligentTieringConfiguration"]
     ]
-    InventoryConfigurations: Optional[Sequence["_InventoryConfiguration"]]
-    LifecycleConfiguration: Optional["_LifecycleConfiguration"]
-    LoggingConfiguration: Optional["_LoggingConfiguration"]
-    MetricsConfigurations: Optional[Sequence["_MetricsConfiguration"]]
-    NotificationConfiguration: Optional["_NotificationConfiguration"]
-    ObjectLockConfiguration: Optional["_ObjectLockConfiguration"]
-    ObjectLockEnabled: Optional[bool]
-    OwnershipControls: Optional["_OwnershipControls"]
-    PublicAccessBlockConfiguration: Optional["_PublicAccessBlockConfiguration"]
-    ReplicationConfiguration: Optional["_ReplicationConfiguration"]
-    Tags: Optional[Any]
-    VersioningConfiguration: Optional["_VersioningConfiguration"]
-    WebsiteConfiguration: Optional["_WebsiteConfiguration"]
+    CorsConfiguration: Optional["_CorsConfiguration"]
     Arn: Optional[str]
-    DomainName: Optional[str]
-    DualStackDomainName: Optional[str]
-    RegionalDomainName: Optional[str]
-    WebsiteURL: Optional[str]
 
     @classmethod
     def _deserialize(
@@ -68,64 +68,64 @@ class AwsS3Bucket(BaseModel):
         dataclasses = {n: o for n, o in getmembers(sys.modules[__name__]) if isclass(o)}
         recast_object(cls, json_data, dataclasses)
         return cls(
-            AccelerateConfiguration=AccelerateConfiguration._deserialize(
-                json_data.get("AccelerateConfiguration")
+            InventoryConfigurations=deserialize_list(
+                json_data.get("InventoryConfigurations"), InventoryConfiguration
             ),
+            WebsiteConfiguration=WebsiteConfiguration._deserialize(
+                json_data.get("WebsiteConfiguration")
+            ),
+            DualStackDomainName=json_data.get("DualStackDomainName"),
             AccessControl=json_data.get("AccessControl"),
             AnalyticsConfigurations=deserialize_list(
                 json_data.get("AnalyticsConfigurations"), AnalyticsConfiguration
             ),
-            BucketEncryption=BucketEncryption._deserialize(
-                json_data.get("BucketEncryption")
+            AccelerateConfiguration=AccelerateConfiguration._deserialize(
+                json_data.get("AccelerateConfiguration")
+            ),
+            PublicAccessBlockConfiguration=PublicAccessBlockConfiguration._deserialize(
+                json_data.get("PublicAccessBlockConfiguration")
             ),
             BucketName=json_data.get("BucketName"),
-            CorsConfiguration=CorsConfiguration._deserialize(
-                json_data.get("CorsConfiguration")
-            ),
-            IntelligentTieringConfigurations=deserialize_list(
-                json_data.get("IntelligentTieringConfigurations"),
-                IntelligentTieringConfiguration,
-            ),
-            InventoryConfigurations=deserialize_list(
-                json_data.get("InventoryConfigurations"), InventoryConfiguration
-            ),
-            LifecycleConfiguration=LifecycleConfiguration._deserialize(
-                json_data.get("LifecycleConfiguration")
-            ),
-            LoggingConfiguration=LoggingConfiguration._deserialize(
-                json_data.get("LoggingConfiguration")
-            ),
-            MetricsConfigurations=deserialize_list(
-                json_data.get("MetricsConfigurations"), MetricsConfiguration
-            ),
-            NotificationConfiguration=NotificationConfiguration._deserialize(
-                json_data.get("NotificationConfiguration")
+            RegionalDomainName=json_data.get("RegionalDomainName"),
+            OwnershipControls=OwnershipControls._deserialize(
+                json_data.get("OwnershipControls")
             ),
             ObjectLockConfiguration=ObjectLockConfiguration._deserialize(
                 json_data.get("ObjectLockConfiguration")
             ),
             ObjectLockEnabled=json_data.get("ObjectLockEnabled"),
-            OwnershipControls=OwnershipControls._deserialize(
-                json_data.get("OwnershipControls")
-            ),
-            PublicAccessBlockConfiguration=PublicAccessBlockConfiguration._deserialize(
-                json_data.get("PublicAccessBlockConfiguration")
+            LoggingConfiguration=LoggingConfiguration._deserialize(
+                json_data.get("LoggingConfiguration")
             ),
             ReplicationConfiguration=ReplicationConfiguration._deserialize(
                 json_data.get("ReplicationConfiguration")
             ),
             Tags=json_data.get("Tags"),
+            DomainName=json_data.get("DomainName"),
+            BucketEncryption=BucketEncryption._deserialize(
+                json_data.get("BucketEncryption")
+            ),
+            WebsiteURL=json_data.get("WebsiteURL"),
+            NotificationConfiguration=NotificationConfiguration._deserialize(
+                json_data.get("NotificationConfiguration")
+            ),
+            LifecycleConfiguration=LifecycleConfiguration._deserialize(
+                json_data.get("LifecycleConfiguration")
+            ),
             VersioningConfiguration=VersioningConfiguration._deserialize(
                 json_data.get("VersioningConfiguration")
             ),
-            WebsiteConfiguration=WebsiteConfiguration._deserialize(
-                json_data.get("WebsiteConfiguration")
+            MetricsConfigurations=deserialize_list(
+                json_data.get("MetricsConfigurations"), MetricsConfiguration
+            ),
+            IntelligentTieringConfigurations=deserialize_list(
+                json_data.get("IntelligentTieringConfigurations"),
+                IntelligentTieringConfiguration,
+            ),
+            CorsConfiguration=CorsConfiguration._deserialize(
+                json_data.get("CorsConfiguration")
             ),
             Arn=json_data.get("Arn"),
-            DomainName=json_data.get("DomainName"),
-            DualStackDomainName=json_data.get("DualStackDomainName"),
-            RegionalDomainName=json_data.get("RegionalDomainName"),
-            WebsiteURL=json_data.get("WebsiteURL"),
         )
 
 
@@ -134,29 +134,191 @@ _AwsS3Bucket = AwsS3Bucket
 
 
 @dataclass
-class AccelerateConfiguration(BaseModel):
-    AccelerationStatus: Optional[str]
+class InventoryConfiguration(BaseModel):
+    Destination: Optional["_Destination"]
+    OptionalFields: Optional[Sequence[str]]
+    IncludedObjectVersions: Optional[str]
+    Enabled: Optional[bool]
+    Id: Optional[str]
+    Prefix: Optional[str]
+    ScheduleFrequency: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_AccelerateConfiguration"],
+        cls: Type["_InventoryConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_AccelerateConfiguration"]:
+    ) -> Optional["_InventoryConfiguration"]:
         if not json_data:
             return None
         return cls(
-            AccelerationStatus=json_data.get("AccelerationStatus"),
+            Destination=Destination._deserialize(json_data.get("Destination")),
+            OptionalFields=json_data.get("OptionalFields"),
+            IncludedObjectVersions=json_data.get("IncludedObjectVersions"),
+            Enabled=json_data.get("Enabled"),
+            Id=json_data.get("Id"),
+            Prefix=json_data.get("Prefix"),
+            ScheduleFrequency=json_data.get("ScheduleFrequency"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_AccelerateConfiguration = AccelerateConfiguration
+_InventoryConfiguration = InventoryConfiguration
+
+
+@dataclass
+class Destination(BaseModel):
+    BucketArn: Optional[str]
+    Format: Optional[str]
+    BucketAccountId: Optional[str]
+    Prefix: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_Destination"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_Destination"]:
+        if not json_data:
+            return None
+        return cls(
+            BucketArn=json_data.get("BucketArn"),
+            Format=json_data.get("Format"),
+            BucketAccountId=json_data.get("BucketAccountId"),
+            Prefix=json_data.get("Prefix"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_Destination = Destination
+
+
+@dataclass
+class WebsiteConfiguration(BaseModel):
+    IndexDocument: Optional[str]
+    RedirectAllRequestsTo: Optional["_RedirectAllRequestsTo"]
+    RoutingRules: Optional[Sequence["_RoutingRule"]]
+    ErrorDocument: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_WebsiteConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_WebsiteConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            IndexDocument=json_data.get("IndexDocument"),
+            RedirectAllRequestsTo=RedirectAllRequestsTo._deserialize(
+                json_data.get("RedirectAllRequestsTo")
+            ),
+            RoutingRules=deserialize_list(json_data.get("RoutingRules"), RoutingRule),
+            ErrorDocument=json_data.get("ErrorDocument"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_WebsiteConfiguration = WebsiteConfiguration
+
+
+@dataclass
+class RedirectAllRequestsTo(BaseModel):
+    Protocol: Optional[str]
+    HostName: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_RedirectAllRequestsTo"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_RedirectAllRequestsTo"]:
+        if not json_data:
+            return None
+        return cls(
+            Protocol=json_data.get("Protocol"),
+            HostName=json_data.get("HostName"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_RedirectAllRequestsTo = RedirectAllRequestsTo
+
+
+@dataclass
+class RoutingRule(BaseModel):
+    RedirectRule: Optional["_RedirectRule"]
+    RoutingRuleCondition: Optional["_RoutingRuleCondition"]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_RoutingRule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_RoutingRule"]:
+        if not json_data:
+            return None
+        return cls(
+            RedirectRule=RedirectRule._deserialize(json_data.get("RedirectRule")),
+            RoutingRuleCondition=RoutingRuleCondition._deserialize(
+                json_data.get("RoutingRuleCondition")
+            ),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_RoutingRule = RoutingRule
+
+
+@dataclass
+class RedirectRule(BaseModel):
+    ReplaceKeyWith: Optional[str]
+    HttpRedirectCode: Optional[str]
+    Protocol: Optional[str]
+    HostName: Optional[str]
+    ReplaceKeyPrefixWith: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_RedirectRule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_RedirectRule"]:
+        if not json_data:
+            return None
+        return cls(
+            ReplaceKeyWith=json_data.get("ReplaceKeyWith"),
+            HttpRedirectCode=json_data.get("HttpRedirectCode"),
+            Protocol=json_data.get("Protocol"),
+            HostName=json_data.get("HostName"),
+            ReplaceKeyPrefixWith=json_data.get("ReplaceKeyPrefixWith"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_RedirectRule = RedirectRule
+
+
+@dataclass
+class RoutingRuleCondition(BaseModel):
+    KeyPrefixEquals: Optional[str]
+    HttpErrorCodeReturnedEquals: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_RoutingRuleCondition"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_RoutingRuleCondition"]:
+        if not json_data:
+            return None
+        return cls(
+            KeyPrefixEquals=json_data.get("KeyPrefixEquals"),
+            HttpErrorCodeReturnedEquals=json_data.get("HttpErrorCodeReturnedEquals"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_RoutingRuleCondition = RoutingRuleCondition
 
 
 @dataclass
 class AnalyticsConfiguration(BaseModel):
-    TagFilters: Optional[Sequence["_TagFilter"]]
     StorageClassAnalysis: Optional["_StorageClassAnalysis"]
+    TagFilters: Optional[Sequence["_TagFilter"]]
     Id: Optional[str]
     Prefix: Optional[str]
 
@@ -168,10 +330,10 @@ class AnalyticsConfiguration(BaseModel):
         if not json_data:
             return None
         return cls(
-            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
             StorageClassAnalysis=StorageClassAnalysis._deserialize(
                 json_data.get("StorageClassAnalysis")
             ),
+            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
             Id=json_data.get("Id"),
             Prefix=json_data.get("Prefix"),
         )
@@ -179,28 +341,6 @@ class AnalyticsConfiguration(BaseModel):
 
 # work around possible type aliasing issues when variable has same name as a model
 _AnalyticsConfiguration = AnalyticsConfiguration
-
-
-@dataclass
-class TagFilter(BaseModel):
-    Value: Optional[str]
-    Key: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_TagFilter"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_TagFilter"]:
-        if not json_data:
-            return None
-        return cls(
-            Value=json_data.get("Value"),
-            Key=json_data.get("Key"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_TagFilter = TagFilter
 
 
 @dataclass
@@ -246,637 +386,111 @@ _DataExport = DataExport
 
 
 @dataclass
-class Destination(BaseModel):
-    BucketArn: Optional[str]
-    BucketAccountId: Optional[str]
-    Format: Optional[str]
-    Prefix: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_Destination"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_Destination"]:
-        if not json_data:
-            return None
-        return cls(
-            BucketArn=json_data.get("BucketArn"),
-            BucketAccountId=json_data.get("BucketAccountId"),
-            Format=json_data.get("Format"),
-            Prefix=json_data.get("Prefix"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_Destination = Destination
-
-
-@dataclass
-class BucketEncryption(BaseModel):
-    ServerSideEncryptionConfiguration: Optional[Sequence["_ServerSideEncryptionRule"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_BucketEncryption"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_BucketEncryption"]:
-        if not json_data:
-            return None
-        return cls(
-            ServerSideEncryptionConfiguration=deserialize_list(
-                json_data.get("ServerSideEncryptionConfiguration"),
-                ServerSideEncryptionRule,
-            ),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_BucketEncryption = BucketEncryption
-
-
-@dataclass
-class ServerSideEncryptionRule(BaseModel):
-    BucketKeyEnabled: Optional[bool]
-    ServerSideEncryptionByDefault: Optional["_ServerSideEncryptionByDefault"]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_ServerSideEncryptionRule"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_ServerSideEncryptionRule"]:
-        if not json_data:
-            return None
-        return cls(
-            BucketKeyEnabled=json_data.get("BucketKeyEnabled"),
-            ServerSideEncryptionByDefault=ServerSideEncryptionByDefault._deserialize(
-                json_data.get("ServerSideEncryptionByDefault")
-            ),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_ServerSideEncryptionRule = ServerSideEncryptionRule
-
-
-@dataclass
-class ServerSideEncryptionByDefault(BaseModel):
-    KMSMasterKeyID: Optional[str]
-    SSEAlgorithm: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_ServerSideEncryptionByDefault"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_ServerSideEncryptionByDefault"]:
-        if not json_data:
-            return None
-        return cls(
-            KMSMasterKeyID=json_data.get("KMSMasterKeyID"),
-            SSEAlgorithm=json_data.get("SSEAlgorithm"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_ServerSideEncryptionByDefault = ServerSideEncryptionByDefault
-
-
-@dataclass
-class CorsConfiguration(BaseModel):
-    CorsRules: Optional[Sequence["_CorsRule"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_CorsConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_CorsConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            CorsRules=deserialize_list(json_data.get("CorsRules"), CorsRule),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_CorsConfiguration = CorsConfiguration
-
-
-@dataclass
-class CorsRule(BaseModel):
-    AllowedHeaders: Optional[Sequence[str]]
-    AllowedMethods: Optional[Sequence[str]]
-    AllowedOrigins: Optional[Sequence[str]]
-    ExposedHeaders: Optional[Sequence[str]]
-    Id: Optional[str]
-    MaxAge: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_CorsRule"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_CorsRule"]:
-        if not json_data:
-            return None
-        return cls(
-            AllowedHeaders=json_data.get("AllowedHeaders"),
-            AllowedMethods=json_data.get("AllowedMethods"),
-            AllowedOrigins=json_data.get("AllowedOrigins"),
-            ExposedHeaders=json_data.get("ExposedHeaders"),
-            Id=json_data.get("Id"),
-            MaxAge=json_data.get("MaxAge"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_CorsRule = CorsRule
-
-
-@dataclass
-class IntelligentTieringConfiguration(BaseModel):
-    Id: Optional[str]
-    Prefix: Optional[str]
-    Status: Optional[str]
-    TagFilters: Optional[Sequence["_TagFilter"]]
-    Tierings: Optional[Sequence["_Tiering"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_IntelligentTieringConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_IntelligentTieringConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            Id=json_data.get("Id"),
-            Prefix=json_data.get("Prefix"),
-            Status=json_data.get("Status"),
-            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
-            Tierings=deserialize_list(json_data.get("Tierings"), Tiering),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_IntelligentTieringConfiguration = IntelligentTieringConfiguration
-
-
-@dataclass
-class Tiering(BaseModel):
-    AccessTier: Optional[str]
-    Days: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_Tiering"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_Tiering"]:
-        if not json_data:
-            return None
-        return cls(
-            AccessTier=json_data.get("AccessTier"),
-            Days=json_data.get("Days"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_Tiering = Tiering
-
-
-@dataclass
-class InventoryConfiguration(BaseModel):
-    Destination: Optional["_Destination"]
-    Enabled: Optional[bool]
-    Id: Optional[str]
-    IncludedObjectVersions: Optional[str]
-    OptionalFields: Optional[Sequence[str]]
-    Prefix: Optional[str]
-    ScheduleFrequency: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_InventoryConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_InventoryConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            Destination=Destination._deserialize(json_data.get("Destination")),
-            Enabled=json_data.get("Enabled"),
-            Id=json_data.get("Id"),
-            IncludedObjectVersions=json_data.get("IncludedObjectVersions"),
-            OptionalFields=json_data.get("OptionalFields"),
-            Prefix=json_data.get("Prefix"),
-            ScheduleFrequency=json_data.get("ScheduleFrequency"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_InventoryConfiguration = InventoryConfiguration
-
-
-@dataclass
-class LifecycleConfiguration(BaseModel):
-    Rules: Optional[Sequence["_Rule"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_LifecycleConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_LifecycleConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            Rules=deserialize_list(json_data.get("Rules"), Rule),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_LifecycleConfiguration = LifecycleConfiguration
-
-
-@dataclass
-class Rule(BaseModel):
-    AbortIncompleteMultipartUpload: Optional["_AbortIncompleteMultipartUpload"]
-    ExpirationDate: Optional[str]
-    ExpirationInDays: Optional[int]
-    ExpiredObjectDeleteMarker: Optional[bool]
-    Id: Optional[str]
-    NoncurrentVersionExpirationInDays: Optional[int]
-    NoncurrentVersionExpiration: Optional["_NoncurrentVersionExpiration"]
-    NoncurrentVersionTransition: Optional["_NoncurrentVersionTransition"]
-    NoncurrentVersionTransitions: Optional[Sequence["_NoncurrentVersionTransition"]]
-    Prefix: Optional[str]
-    Status: Optional[str]
-    TagFilters: Optional[Sequence["_TagFilter"]]
-    ObjectSizeGreaterThan: Optional[str]
-    ObjectSizeLessThan: Optional[str]
-    Transition: Optional["_Transition"]
-    Transitions: Optional[Sequence["_Transition"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_Rule"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_Rule"]:
-        if not json_data:
-            return None
-        return cls(
-            AbortIncompleteMultipartUpload=AbortIncompleteMultipartUpload._deserialize(
-                json_data.get("AbortIncompleteMultipartUpload")
-            ),
-            ExpirationDate=json_data.get("ExpirationDate"),
-            ExpirationInDays=json_data.get("ExpirationInDays"),
-            ExpiredObjectDeleteMarker=json_data.get("ExpiredObjectDeleteMarker"),
-            Id=json_data.get("Id"),
-            NoncurrentVersionExpirationInDays=json_data.get(
-                "NoncurrentVersionExpirationInDays"
-            ),
-            NoncurrentVersionExpiration=NoncurrentVersionExpiration._deserialize(
-                json_data.get("NoncurrentVersionExpiration")
-            ),
-            NoncurrentVersionTransition=NoncurrentVersionTransition._deserialize(
-                json_data.get("NoncurrentVersionTransition")
-            ),
-            NoncurrentVersionTransitions=deserialize_list(
-                json_data.get("NoncurrentVersionTransitions"),
-                NoncurrentVersionTransition,
-            ),
-            Prefix=json_data.get("Prefix"),
-            Status=json_data.get("Status"),
-            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
-            ObjectSizeGreaterThan=json_data.get("ObjectSizeGreaterThan"),
-            ObjectSizeLessThan=json_data.get("ObjectSizeLessThan"),
-            Transition=Transition._deserialize(json_data.get("Transition")),
-            Transitions=deserialize_list(json_data.get("Transitions"), Transition),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_Rule = Rule
-
-
-@dataclass
-class AbortIncompleteMultipartUpload(BaseModel):
-    DaysAfterInitiation: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_AbortIncompleteMultipartUpload"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_AbortIncompleteMultipartUpload"]:
-        if not json_data:
-            return None
-        return cls(
-            DaysAfterInitiation=json_data.get("DaysAfterInitiation"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_AbortIncompleteMultipartUpload = AbortIncompleteMultipartUpload
-
-
-@dataclass
-class NoncurrentVersionExpiration(BaseModel):
-    NoncurrentDays: Optional[int]
-    NewerNoncurrentVersions: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_NoncurrentVersionExpiration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_NoncurrentVersionExpiration"]:
-        if not json_data:
-            return None
-        return cls(
-            NoncurrentDays=json_data.get("NoncurrentDays"),
-            NewerNoncurrentVersions=json_data.get("NewerNoncurrentVersions"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_NoncurrentVersionExpiration = NoncurrentVersionExpiration
-
-
-@dataclass
-class NoncurrentVersionTransition(BaseModel):
-    StorageClass: Optional[str]
-    TransitionInDays: Optional[int]
-    NewerNoncurrentVersions: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_NoncurrentVersionTransition"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_NoncurrentVersionTransition"]:
-        if not json_data:
-            return None
-        return cls(
-            StorageClass=json_data.get("StorageClass"),
-            TransitionInDays=json_data.get("TransitionInDays"),
-            NewerNoncurrentVersions=json_data.get("NewerNoncurrentVersions"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_NoncurrentVersionTransition = NoncurrentVersionTransition
-
-
-@dataclass
-class Transition(BaseModel):
-    StorageClass: Optional[str]
-    TransitionDate: Optional[str]
-    TransitionInDays: Optional[int]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_Transition"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_Transition"]:
-        if not json_data:
-            return None
-        return cls(
-            StorageClass=json_data.get("StorageClass"),
-            TransitionDate=json_data.get("TransitionDate"),
-            TransitionInDays=json_data.get("TransitionInDays"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_Transition = Transition
-
-
-@dataclass
-class LoggingConfiguration(BaseModel):
-    DestinationBucketName: Optional[str]
-    LogFilePrefix: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_LoggingConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_LoggingConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            DestinationBucketName=json_data.get("DestinationBucketName"),
-            LogFilePrefix=json_data.get("LogFilePrefix"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_LoggingConfiguration = LoggingConfiguration
-
-
-@dataclass
-class MetricsConfiguration(BaseModel):
-    AccessPointArn: Optional[str]
-    Id: Optional[str]
-    Prefix: Optional[str]
-    TagFilters: Optional[Sequence["_TagFilter"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_MetricsConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_MetricsConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            AccessPointArn=json_data.get("AccessPointArn"),
-            Id=json_data.get("Id"),
-            Prefix=json_data.get("Prefix"),
-            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_MetricsConfiguration = MetricsConfiguration
-
-
-@dataclass
-class NotificationConfiguration(BaseModel):
-    EventBridgeConfiguration: Optional["_EventBridgeConfiguration"]
-    LambdaConfigurations: Optional[Sequence["_LambdaConfiguration"]]
-    QueueConfigurations: Optional[Sequence["_QueueConfiguration"]]
-    TopicConfigurations: Optional[Sequence["_TopicConfiguration"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_NotificationConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_NotificationConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            EventBridgeConfiguration=EventBridgeConfiguration._deserialize(
-                json_data.get("EventBridgeConfiguration")
-            ),
-            LambdaConfigurations=deserialize_list(
-                json_data.get("LambdaConfigurations"), LambdaConfiguration
-            ),
-            QueueConfigurations=deserialize_list(
-                json_data.get("QueueConfigurations"), QueueConfiguration
-            ),
-            TopicConfigurations=deserialize_list(
-                json_data.get("TopicConfigurations"), TopicConfiguration
-            ),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_NotificationConfiguration = NotificationConfiguration
-
-
-@dataclass
-class EventBridgeConfiguration(BaseModel):
-    EventBridgeEnabled: Optional[bool]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_EventBridgeConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_EventBridgeConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            EventBridgeEnabled=json_data.get("EventBridgeEnabled"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_EventBridgeConfiguration = EventBridgeConfiguration
-
-
-@dataclass
-class LambdaConfiguration(BaseModel):
-    Event: Optional[str]
-    Filter: Optional["_NotificationFilter"]
-    Function: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_LambdaConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_LambdaConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            Event=json_data.get("Event"),
-            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
-            Function=json_data.get("Function"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_LambdaConfiguration = LambdaConfiguration
-
-
-@dataclass
-class NotificationFilter(BaseModel):
-    S3Key: Optional["_S3KeyFilter"]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_NotificationFilter"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_NotificationFilter"]:
-        if not json_data:
-            return None
-        return cls(
-            S3Key=S3KeyFilter._deserialize(json_data.get("S3Key")),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_NotificationFilter = NotificationFilter
-
-
-@dataclass
-class S3KeyFilter(BaseModel):
-    Rules: Optional[Sequence["_FilterRule"]]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_S3KeyFilter"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_S3KeyFilter"]:
-        if not json_data:
-            return None
-        return cls(
-            Rules=deserialize_list(json_data.get("Rules"), FilterRule),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_S3KeyFilter = S3KeyFilter
-
-
-@dataclass
-class FilterRule(BaseModel):
-    Name: Optional[str]
+class TagFilter(BaseModel):
     Value: Optional[str]
+    Key: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_FilterRule"],
+        cls: Type["_TagFilter"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_FilterRule"]:
+    ) -> Optional["_TagFilter"]:
         if not json_data:
             return None
         return cls(
-            Name=json_data.get("Name"),
             Value=json_data.get("Value"),
+            Key=json_data.get("Key"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_FilterRule = FilterRule
+_TagFilter = TagFilter
 
 
 @dataclass
-class QueueConfiguration(BaseModel):
-    Event: Optional[str]
-    Filter: Optional["_NotificationFilter"]
-    Queue: Optional[str]
+class AccelerateConfiguration(BaseModel):
+    AccelerationStatus: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_QueueConfiguration"],
+        cls: Type["_AccelerateConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_QueueConfiguration"]:
+    ) -> Optional["_AccelerateConfiguration"]:
         if not json_data:
             return None
         return cls(
-            Event=json_data.get("Event"),
-            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
-            Queue=json_data.get("Queue"),
+            AccelerationStatus=json_data.get("AccelerationStatus"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_QueueConfiguration = QueueConfiguration
+_AccelerateConfiguration = AccelerateConfiguration
 
 
 @dataclass
-class TopicConfiguration(BaseModel):
-    Event: Optional[str]
-    Filter: Optional["_NotificationFilter"]
-    Topic: Optional[str]
+class PublicAccessBlockConfiguration(BaseModel):
+    RestrictPublicBuckets: Optional[bool]
+    BlockPublicPolicy: Optional[bool]
+    BlockPublicAcls: Optional[bool]
+    IgnorePublicAcls: Optional[bool]
 
     @classmethod
     def _deserialize(
-        cls: Type["_TopicConfiguration"],
+        cls: Type["_PublicAccessBlockConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_TopicConfiguration"]:
+    ) -> Optional["_PublicAccessBlockConfiguration"]:
         if not json_data:
             return None
         return cls(
-            Event=json_data.get("Event"),
-            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
-            Topic=json_data.get("Topic"),
+            RestrictPublicBuckets=json_data.get("RestrictPublicBuckets"),
+            BlockPublicPolicy=json_data.get("BlockPublicPolicy"),
+            BlockPublicAcls=json_data.get("BlockPublicAcls"),
+            IgnorePublicAcls=json_data.get("IgnorePublicAcls"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_TopicConfiguration = TopicConfiguration
+_PublicAccessBlockConfiguration = PublicAccessBlockConfiguration
+
+
+@dataclass
+class OwnershipControls(BaseModel):
+    Rules: Optional[Sequence["_OwnershipControlsRule"]]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_OwnershipControls"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_OwnershipControls"]:
+        if not json_data:
+            return None
+        return cls(
+            Rules=deserialize_list(json_data.get("Rules"), OwnershipControlsRule),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_OwnershipControls = OwnershipControls
+
+
+@dataclass
+class OwnershipControlsRule(BaseModel):
+    ObjectOwnership: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_OwnershipControlsRule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_OwnershipControlsRule"]:
+        if not json_data:
+            return None
+        return cls(
+            ObjectOwnership=json_data.get("ObjectOwnership"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_OwnershipControlsRule = OwnershipControlsRule
 
 
 @dataclass
@@ -948,69 +562,73 @@ _DefaultRetention = DefaultRetention
 
 
 @dataclass
-class OwnershipControls(BaseModel):
-    Rules: Optional[Sequence["_OwnershipControlsRule"]]
+class LoggingConfiguration(BaseModel):
+    TargetObjectKeyFormat: Optional["_TargetObjectKeyFormat"]
+    LogFilePrefix: Optional[str]
+    DestinationBucketName: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_OwnershipControls"],
+        cls: Type["_LoggingConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_OwnershipControls"]:
+    ) -> Optional["_LoggingConfiguration"]:
         if not json_data:
             return None
         return cls(
-            Rules=deserialize_list(json_data.get("Rules"), OwnershipControlsRule),
+            TargetObjectKeyFormat=TargetObjectKeyFormat._deserialize(
+                json_data.get("TargetObjectKeyFormat")
+            ),
+            LogFilePrefix=json_data.get("LogFilePrefix"),
+            DestinationBucketName=json_data.get("DestinationBucketName"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_OwnershipControls = OwnershipControls
+_LoggingConfiguration = LoggingConfiguration
 
 
 @dataclass
-class OwnershipControlsRule(BaseModel):
-    ObjectOwnership: Optional[str]
+class TargetObjectKeyFormat(BaseModel):
+    SimplePrefix: Optional[MutableMapping[str, Any]]
+    PartitionedPrefix: Optional["_PartitionedPrefix"]
 
     @classmethod
     def _deserialize(
-        cls: Type["_OwnershipControlsRule"],
+        cls: Type["_TargetObjectKeyFormat"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_OwnershipControlsRule"]:
+    ) -> Optional["_TargetObjectKeyFormat"]:
         if not json_data:
             return None
         return cls(
-            ObjectOwnership=json_data.get("ObjectOwnership"),
+            SimplePrefix=json_data.get("SimplePrefix"),
+            PartitionedPrefix=PartitionedPrefix._deserialize(
+                json_data.get("PartitionedPrefix")
+            ),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_OwnershipControlsRule = OwnershipControlsRule
+_TargetObjectKeyFormat = TargetObjectKeyFormat
 
 
 @dataclass
-class PublicAccessBlockConfiguration(BaseModel):
-    BlockPublicAcls: Optional[bool]
-    BlockPublicPolicy: Optional[bool]
-    IgnorePublicAcls: Optional[bool]
-    RestrictPublicBuckets: Optional[bool]
+class PartitionedPrefix(BaseModel):
+    PartitionDateSource: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_PublicAccessBlockConfiguration"],
+        cls: Type["_PartitionedPrefix"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_PublicAccessBlockConfiguration"]:
+    ) -> Optional["_PartitionedPrefix"]:
         if not json_data:
             return None
         return cls(
-            BlockPublicAcls=json_data.get("BlockPublicAcls"),
-            BlockPublicPolicy=json_data.get("BlockPublicPolicy"),
-            IgnorePublicAcls=json_data.get("IgnorePublicAcls"),
-            RestrictPublicBuckets=json_data.get("RestrictPublicBuckets"),
+            PartitionDateSource=json_data.get("PartitionDateSource"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_PublicAccessBlockConfiguration = PublicAccessBlockConfiguration
+_PartitionedPrefix = PartitionedPrefix
 
 
 @dataclass
@@ -1037,14 +655,14 @@ _ReplicationConfiguration = ReplicationConfiguration
 
 @dataclass
 class ReplicationRule(BaseModel):
-    DeleteMarkerReplication: Optional["_DeleteMarkerReplication"]
+    Status: Optional[str]
     Destination: Optional["_ReplicationDestination"]
     Filter: Optional["_ReplicationRuleFilter"]
-    Id: Optional[str]
-    Prefix: Optional[str]
     Priority: Optional[int]
     SourceSelectionCriteria: Optional["_SourceSelectionCriteria"]
-    Status: Optional[str]
+    Id: Optional[str]
+    Prefix: Optional[str]
+    DeleteMarkerReplication: Optional["_DeleteMarkerReplication"]
 
     @classmethod
     def _deserialize(
@@ -1054,20 +672,20 @@ class ReplicationRule(BaseModel):
         if not json_data:
             return None
         return cls(
-            DeleteMarkerReplication=DeleteMarkerReplication._deserialize(
-                json_data.get("DeleteMarkerReplication")
-            ),
+            Status=json_data.get("Status"),
             Destination=ReplicationDestination._deserialize(
                 json_data.get("Destination")
             ),
             Filter=ReplicationRuleFilter._deserialize(json_data.get("Filter")),
-            Id=json_data.get("Id"),
-            Prefix=json_data.get("Prefix"),
             Priority=json_data.get("Priority"),
             SourceSelectionCriteria=SourceSelectionCriteria._deserialize(
                 json_data.get("SourceSelectionCriteria")
             ),
-            Status=json_data.get("Status"),
+            Id=json_data.get("Id"),
+            Prefix=json_data.get("Prefix"),
+            DeleteMarkerReplication=DeleteMarkerReplication._deserialize(
+                json_data.get("DeleteMarkerReplication")
+            ),
         )
 
 
@@ -1076,34 +694,14 @@ _ReplicationRule = ReplicationRule
 
 
 @dataclass
-class DeleteMarkerReplication(BaseModel):
-    Status: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_DeleteMarkerReplication"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_DeleteMarkerReplication"]:
-        if not json_data:
-            return None
-        return cls(
-            Status=json_data.get("Status"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_DeleteMarkerReplication = DeleteMarkerReplication
-
-
-@dataclass
 class ReplicationDestination(BaseModel):
     AccessControlTranslation: Optional["_AccessControlTranslation"]
     Account: Optional[str]
+    Metrics: Optional["_Metrics"]
     Bucket: Optional[str]
     EncryptionConfiguration: Optional["_EncryptionConfiguration"]
-    Metrics: Optional["_Metrics"]
-    ReplicationTime: Optional["_ReplicationTime"]
     StorageClass: Optional[str]
+    ReplicationTime: Optional["_ReplicationTime"]
 
     @classmethod
     def _deserialize(
@@ -1117,15 +715,15 @@ class ReplicationDestination(BaseModel):
                 json_data.get("AccessControlTranslation")
             ),
             Account=json_data.get("Account"),
+            Metrics=Metrics._deserialize(json_data.get("Metrics")),
             Bucket=json_data.get("Bucket"),
             EncryptionConfiguration=EncryptionConfiguration._deserialize(
                 json_data.get("EncryptionConfiguration")
             ),
-            Metrics=Metrics._deserialize(json_data.get("Metrics")),
+            StorageClass=json_data.get("StorageClass"),
             ReplicationTime=ReplicationTime._deserialize(
                 json_data.get("ReplicationTime")
             ),
-            StorageClass=json_data.get("StorageClass"),
         )
 
 
@@ -1154,29 +752,9 @@ _AccessControlTranslation = AccessControlTranslation
 
 
 @dataclass
-class EncryptionConfiguration(BaseModel):
-    ReplicaKmsKeyID: Optional[str]
-
-    @classmethod
-    def _deserialize(
-        cls: Type["_EncryptionConfiguration"],
-        json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_EncryptionConfiguration"]:
-        if not json_data:
-            return None
-        return cls(
-            ReplicaKmsKeyID=json_data.get("ReplicaKmsKeyID"),
-        )
-
-
-# work around possible type aliasing issues when variable has same name as a model
-_EncryptionConfiguration = EncryptionConfiguration
-
-
-@dataclass
 class Metrics(BaseModel):
-    EventThreshold: Optional["_ReplicationTimeValue"]
     Status: Optional[str]
+    EventThreshold: Optional["_ReplicationTimeValue"]
 
     @classmethod
     def _deserialize(
@@ -1186,10 +764,10 @@ class Metrics(BaseModel):
         if not json_data:
             return None
         return cls(
+            Status=json_data.get("Status"),
             EventThreshold=ReplicationTimeValue._deserialize(
                 json_data.get("EventThreshold")
             ),
-            Status=json_data.get("Status"),
         )
 
 
@@ -1218,6 +796,26 @@ _ReplicationTimeValue = ReplicationTimeValue
 
 
 @dataclass
+class EncryptionConfiguration(BaseModel):
+    ReplicaKmsKeyID: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_EncryptionConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_EncryptionConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            ReplicaKmsKeyID=json_data.get("ReplicaKmsKeyID"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_EncryptionConfiguration = EncryptionConfiguration
+
+
+@dataclass
 class ReplicationTime(BaseModel):
     Status: Optional[str]
     Time: Optional["_ReplicationTimeValue"]
@@ -1242,8 +840,8 @@ _ReplicationTime = ReplicationTime
 @dataclass
 class ReplicationRuleFilter(BaseModel):
     And: Optional["_ReplicationRuleAndOperator"]
-    Prefix: Optional[str]
     TagFilter: Optional["_TagFilter"]
+    Prefix: Optional[str]
 
     @classmethod
     def _deserialize(
@@ -1254,8 +852,8 @@ class ReplicationRuleFilter(BaseModel):
             return None
         return cls(
             And=ReplicationRuleAndOperator._deserialize(json_data.get("And")),
-            Prefix=json_data.get("Prefix"),
             TagFilter=TagFilter._deserialize(json_data.get("TagFilter")),
+            Prefix=json_data.get("Prefix"),
         )
 
 
@@ -1265,8 +863,8 @@ _ReplicationRuleFilter = ReplicationRuleFilter
 
 @dataclass
 class ReplicationRuleAndOperator(BaseModel):
-    Prefix: Optional[str]
     TagFilters: Optional[Sequence["_TagFilter"]]
+    Prefix: Optional[str]
 
     @classmethod
     def _deserialize(
@@ -1276,8 +874,8 @@ class ReplicationRuleAndOperator(BaseModel):
         if not json_data:
             return None
         return cls(
-            Prefix=json_data.get("Prefix"),
             TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
+            Prefix=json_data.get("Prefix"),
         )
 
 
@@ -1352,9 +950,29 @@ _SseKmsEncryptedObjects = SseKmsEncryptedObjects
 
 
 @dataclass
+class DeleteMarkerReplication(BaseModel):
+    Status: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_DeleteMarkerReplication"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_DeleteMarkerReplication"]:
+        if not json_data:
+            return None
+        return cls(
+            Status=json_data.get("Status"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_DeleteMarkerReplication = DeleteMarkerReplication
+
+
+@dataclass
 class Tag(BaseModel):
-    Key: Optional[str]
     Value: Optional[str]
+    Key: Optional[str]
 
     @classmethod
     def _deserialize(
@@ -1364,13 +982,441 @@ class Tag(BaseModel):
         if not json_data:
             return None
         return cls(
-            Key=json_data.get("Key"),
             Value=json_data.get("Value"),
+            Key=json_data.get("Key"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
 _Tag = Tag
+
+
+@dataclass
+class BucketEncryption(BaseModel):
+    ServerSideEncryptionConfiguration: Optional[Sequence["_ServerSideEncryptionRule"]]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_BucketEncryption"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_BucketEncryption"]:
+        if not json_data:
+            return None
+        return cls(
+            ServerSideEncryptionConfiguration=deserialize_list(
+                json_data.get("ServerSideEncryptionConfiguration"),
+                ServerSideEncryptionRule,
+            ),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_BucketEncryption = BucketEncryption
+
+
+@dataclass
+class ServerSideEncryptionRule(BaseModel):
+    BucketKeyEnabled: Optional[bool]
+    ServerSideEncryptionByDefault: Optional["_ServerSideEncryptionByDefault"]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_ServerSideEncryptionRule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_ServerSideEncryptionRule"]:
+        if not json_data:
+            return None
+        return cls(
+            BucketKeyEnabled=json_data.get("BucketKeyEnabled"),
+            ServerSideEncryptionByDefault=ServerSideEncryptionByDefault._deserialize(
+                json_data.get("ServerSideEncryptionByDefault")
+            ),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_ServerSideEncryptionRule = ServerSideEncryptionRule
+
+
+@dataclass
+class ServerSideEncryptionByDefault(BaseModel):
+    SSEAlgorithm: Optional[str]
+    KMSMasterKeyID: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_ServerSideEncryptionByDefault"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_ServerSideEncryptionByDefault"]:
+        if not json_data:
+            return None
+        return cls(
+            SSEAlgorithm=json_data.get("SSEAlgorithm"),
+            KMSMasterKeyID=json_data.get("KMSMasterKeyID"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_ServerSideEncryptionByDefault = ServerSideEncryptionByDefault
+
+
+@dataclass
+class NotificationConfiguration(BaseModel):
+    TopicConfigurations: Optional[Sequence["_TopicConfiguration"]]
+    QueueConfigurations: Optional[Sequence["_QueueConfiguration"]]
+    LambdaConfigurations: Optional[Sequence["_LambdaConfiguration"]]
+    EventBridgeConfiguration: Optional["_EventBridgeConfiguration"]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_NotificationConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_NotificationConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            TopicConfigurations=deserialize_list(
+                json_data.get("TopicConfigurations"), TopicConfiguration
+            ),
+            QueueConfigurations=deserialize_list(
+                json_data.get("QueueConfigurations"), QueueConfiguration
+            ),
+            LambdaConfigurations=deserialize_list(
+                json_data.get("LambdaConfigurations"), LambdaConfiguration
+            ),
+            EventBridgeConfiguration=EventBridgeConfiguration._deserialize(
+                json_data.get("EventBridgeConfiguration")
+            ),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_NotificationConfiguration = NotificationConfiguration
+
+
+@dataclass
+class TopicConfiguration(BaseModel):
+    Filter: Optional["_NotificationFilter"]
+    Event: Optional[str]
+    Topic: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_TopicConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_TopicConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
+            Event=json_data.get("Event"),
+            Topic=json_data.get("Topic"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_TopicConfiguration = TopicConfiguration
+
+
+@dataclass
+class NotificationFilter(BaseModel):
+    S3Key: Optional["_S3KeyFilter"]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_NotificationFilter"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_NotificationFilter"]:
+        if not json_data:
+            return None
+        return cls(
+            S3Key=S3KeyFilter._deserialize(json_data.get("S3Key")),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_NotificationFilter = NotificationFilter
+
+
+@dataclass
+class S3KeyFilter(BaseModel):
+    Rules: Optional[AbstractSet["_FilterRule"]]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_S3KeyFilter"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_S3KeyFilter"]:
+        if not json_data:
+            return None
+        return cls(
+            Rules=set_or_none(json_data.get("Rules")),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_S3KeyFilter = S3KeyFilter
+
+
+@dataclass
+class FilterRule(BaseModel):
+    Value: Optional[str]
+    Name: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_FilterRule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_FilterRule"]:
+        if not json_data:
+            return None
+        return cls(
+            Value=json_data.get("Value"),
+            Name=json_data.get("Name"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_FilterRule = FilterRule
+
+
+@dataclass
+class QueueConfiguration(BaseModel):
+    Filter: Optional["_NotificationFilter"]
+    Event: Optional[str]
+    Queue: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_QueueConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_QueueConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
+            Event=json_data.get("Event"),
+            Queue=json_data.get("Queue"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_QueueConfiguration = QueueConfiguration
+
+
+@dataclass
+class LambdaConfiguration(BaseModel):
+    Function: Optional[str]
+    Filter: Optional["_NotificationFilter"]
+    Event: Optional[str]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_LambdaConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_LambdaConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            Function=json_data.get("Function"),
+            Filter=NotificationFilter._deserialize(json_data.get("Filter")),
+            Event=json_data.get("Event"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_LambdaConfiguration = LambdaConfiguration
+
+
+@dataclass
+class EventBridgeConfiguration(BaseModel):
+    EventBridgeEnabled: Optional[bool]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_EventBridgeConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_EventBridgeConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            EventBridgeEnabled=json_data.get("EventBridgeEnabled"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_EventBridgeConfiguration = EventBridgeConfiguration
+
+
+@dataclass
+class LifecycleConfiguration(BaseModel):
+    Rules: Optional[Sequence["_Rule"]]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_LifecycleConfiguration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_LifecycleConfiguration"]:
+        if not json_data:
+            return None
+        return cls(
+            Rules=deserialize_list(json_data.get("Rules"), Rule),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_LifecycleConfiguration = LifecycleConfiguration
+
+
+@dataclass
+class Rule(BaseModel):
+    Status: Optional[str]
+    ExpiredObjectDeleteMarker: Optional[bool]
+    NoncurrentVersionExpirationInDays: Optional[int]
+    Transitions: Optional[Sequence["_Transition"]]
+    ObjectSizeGreaterThan: Optional[str]
+    TagFilters: Optional[Sequence["_TagFilter"]]
+    NoncurrentVersionTransitions: Optional[Sequence["_NoncurrentVersionTransition"]]
+    Prefix: Optional[str]
+    ObjectSizeLessThan: Optional[str]
+    NoncurrentVersionTransition: Optional["_NoncurrentVersionTransition"]
+    ExpirationDate: Optional[str]
+    NoncurrentVersionExpiration: Optional["_NoncurrentVersionExpiration"]
+    ExpirationInDays: Optional[int]
+    Transition: Optional["_Transition"]
+    Id: Optional[str]
+    AbortIncompleteMultipartUpload: Optional["_AbortIncompleteMultipartUpload"]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_Rule"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_Rule"]:
+        if not json_data:
+            return None
+        return cls(
+            Status=json_data.get("Status"),
+            ExpiredObjectDeleteMarker=json_data.get("ExpiredObjectDeleteMarker"),
+            NoncurrentVersionExpirationInDays=json_data.get(
+                "NoncurrentVersionExpirationInDays"
+            ),
+            Transitions=deserialize_list(json_data.get("Transitions"), Transition),
+            ObjectSizeGreaterThan=json_data.get("ObjectSizeGreaterThan"),
+            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
+            NoncurrentVersionTransitions=deserialize_list(
+                json_data.get("NoncurrentVersionTransitions"),
+                NoncurrentVersionTransition,
+            ),
+            Prefix=json_data.get("Prefix"),
+            ObjectSizeLessThan=json_data.get("ObjectSizeLessThan"),
+            NoncurrentVersionTransition=NoncurrentVersionTransition._deserialize(
+                json_data.get("NoncurrentVersionTransition")
+            ),
+            ExpirationDate=json_data.get("ExpirationDate"),
+            NoncurrentVersionExpiration=NoncurrentVersionExpiration._deserialize(
+                json_data.get("NoncurrentVersionExpiration")
+            ),
+            ExpirationInDays=json_data.get("ExpirationInDays"),
+            Transition=Transition._deserialize(json_data.get("Transition")),
+            Id=json_data.get("Id"),
+            AbortIncompleteMultipartUpload=AbortIncompleteMultipartUpload._deserialize(
+                json_data.get("AbortIncompleteMultipartUpload")
+            ),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_Rule = Rule
+
+
+@dataclass
+class Transition(BaseModel):
+    TransitionDate: Optional[str]
+    StorageClass: Optional[str]
+    TransitionInDays: Optional[int]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_Transition"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_Transition"]:
+        if not json_data:
+            return None
+        return cls(
+            TransitionDate=json_data.get("TransitionDate"),
+            StorageClass=json_data.get("StorageClass"),
+            TransitionInDays=json_data.get("TransitionInDays"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_Transition = Transition
+
+
+@dataclass
+class NoncurrentVersionTransition(BaseModel):
+    StorageClass: Optional[str]
+    TransitionInDays: Optional[int]
+    NewerNoncurrentVersions: Optional[int]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_NoncurrentVersionTransition"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_NoncurrentVersionTransition"]:
+        if not json_data:
+            return None
+        return cls(
+            StorageClass=json_data.get("StorageClass"),
+            TransitionInDays=json_data.get("TransitionInDays"),
+            NewerNoncurrentVersions=json_data.get("NewerNoncurrentVersions"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_NoncurrentVersionTransition = NoncurrentVersionTransition
+
+
+@dataclass
+class NoncurrentVersionExpiration(BaseModel):
+    NoncurrentDays: Optional[int]
+    NewerNoncurrentVersions: Optional[int]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_NoncurrentVersionExpiration"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_NoncurrentVersionExpiration"]:
+        if not json_data:
+            return None
+        return cls(
+            NoncurrentDays=json_data.get("NoncurrentDays"),
+            NewerNoncurrentVersions=json_data.get("NewerNoncurrentVersions"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_NoncurrentVersionExpiration = NoncurrentVersionExpiration
+
+
+@dataclass
+class AbortIncompleteMultipartUpload(BaseModel):
+    DaysAfterInitiation: Optional[int]
+
+    @classmethod
+    def _deserialize(
+        cls: Type["_AbortIncompleteMultipartUpload"],
+        json_data: Optional[Mapping[str, Any]],
+    ) -> Optional["_AbortIncompleteMultipartUpload"]:
+        if not json_data:
+            return None
+        return cls(
+            DaysAfterInitiation=json_data.get("DaysAfterInitiation"),
+        )
+
+
+# work around possible type aliasing issues when variable has same name as a model
+_AbortIncompleteMultipartUpload = AbortIncompleteMultipartUpload
 
 
 @dataclass
@@ -1394,124 +1440,126 @@ _VersioningConfiguration = VersioningConfiguration
 
 
 @dataclass
-class WebsiteConfiguration(BaseModel):
-    ErrorDocument: Optional[str]
-    IndexDocument: Optional[str]
-    RoutingRules: Optional[Sequence["_RoutingRule"]]
-    RedirectAllRequestsTo: Optional["_RedirectAllRequestsTo"]
+class MetricsConfiguration(BaseModel):
+    AccessPointArn: Optional[str]
+    TagFilters: Optional[Sequence["_TagFilter"]]
+    Id: Optional[str]
+    Prefix: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_WebsiteConfiguration"],
+        cls: Type["_MetricsConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_WebsiteConfiguration"]:
+    ) -> Optional["_MetricsConfiguration"]:
         if not json_data:
             return None
         return cls(
-            ErrorDocument=json_data.get("ErrorDocument"),
-            IndexDocument=json_data.get("IndexDocument"),
-            RoutingRules=deserialize_list(json_data.get("RoutingRules"), RoutingRule),
-            RedirectAllRequestsTo=RedirectAllRequestsTo._deserialize(
-                json_data.get("RedirectAllRequestsTo")
-            ),
+            AccessPointArn=json_data.get("AccessPointArn"),
+            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
+            Id=json_data.get("Id"),
+            Prefix=json_data.get("Prefix"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_WebsiteConfiguration = WebsiteConfiguration
+_MetricsConfiguration = MetricsConfiguration
 
 
 @dataclass
-class RoutingRule(BaseModel):
-    RedirectRule: Optional["_RedirectRule"]
-    RoutingRuleCondition: Optional["_RoutingRuleCondition"]
+class IntelligentTieringConfiguration(BaseModel):
+    Status: Optional[str]
+    Tierings: Optional[Sequence["_Tiering"]]
+    TagFilters: Optional[Sequence["_TagFilter"]]
+    Id: Optional[str]
+    Prefix: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_RoutingRule"],
+        cls: Type["_IntelligentTieringConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_RoutingRule"]:
+    ) -> Optional["_IntelligentTieringConfiguration"]:
         if not json_data:
             return None
         return cls(
-            RedirectRule=RedirectRule._deserialize(json_data.get("RedirectRule")),
-            RoutingRuleCondition=RoutingRuleCondition._deserialize(
-                json_data.get("RoutingRuleCondition")
-            ),
+            Status=json_data.get("Status"),
+            Tierings=deserialize_list(json_data.get("Tierings"), Tiering),
+            TagFilters=deserialize_list(json_data.get("TagFilters"), TagFilter),
+            Id=json_data.get("Id"),
+            Prefix=json_data.get("Prefix"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_RoutingRule = RoutingRule
+_IntelligentTieringConfiguration = IntelligentTieringConfiguration
 
 
 @dataclass
-class RedirectRule(BaseModel):
-    HostName: Optional[str]
-    HttpRedirectCode: Optional[str]
-    Protocol: Optional[str]
-    ReplaceKeyPrefixWith: Optional[str]
-    ReplaceKeyWith: Optional[str]
+class Tiering(BaseModel):
+    AccessTier: Optional[str]
+    Days: Optional[int]
 
     @classmethod
     def _deserialize(
-        cls: Type["_RedirectRule"],
+        cls: Type["_Tiering"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_RedirectRule"]:
+    ) -> Optional["_Tiering"]:
         if not json_data:
             return None
         return cls(
-            HostName=json_data.get("HostName"),
-            HttpRedirectCode=json_data.get("HttpRedirectCode"),
-            Protocol=json_data.get("Protocol"),
-            ReplaceKeyPrefixWith=json_data.get("ReplaceKeyPrefixWith"),
-            ReplaceKeyWith=json_data.get("ReplaceKeyWith"),
+            AccessTier=json_data.get("AccessTier"),
+            Days=json_data.get("Days"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_RedirectRule = RedirectRule
+_Tiering = Tiering
 
 
 @dataclass
-class RoutingRuleCondition(BaseModel):
-    KeyPrefixEquals: Optional[str]
-    HttpErrorCodeReturnedEquals: Optional[str]
+class CorsConfiguration(BaseModel):
+    CorsRules: Optional[Sequence["_CorsRule"]]
 
     @classmethod
     def _deserialize(
-        cls: Type["_RoutingRuleCondition"],
+        cls: Type["_CorsConfiguration"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_RoutingRuleCondition"]:
+    ) -> Optional["_CorsConfiguration"]:
         if not json_data:
             return None
         return cls(
-            KeyPrefixEquals=json_data.get("KeyPrefixEquals"),
-            HttpErrorCodeReturnedEquals=json_data.get("HttpErrorCodeReturnedEquals"),
+            CorsRules=deserialize_list(json_data.get("CorsRules"), CorsRule),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_RoutingRuleCondition = RoutingRuleCondition
+_CorsConfiguration = CorsConfiguration
 
 
 @dataclass
-class RedirectAllRequestsTo(BaseModel):
-    HostName: Optional[str]
-    Protocol: Optional[str]
+class CorsRule(BaseModel):
+    ExposedHeaders: Optional[Sequence[str]]
+    AllowedMethods: Optional[Sequence[str]]
+    AllowedOrigins: Optional[Sequence[str]]
+    AllowedHeaders: Optional[Sequence[str]]
+    MaxAge: Optional[int]
+    Id: Optional[str]
 
     @classmethod
     def _deserialize(
-        cls: Type["_RedirectAllRequestsTo"],
+        cls: Type["_CorsRule"],
         json_data: Optional[Mapping[str, Any]],
-    ) -> Optional["_RedirectAllRequestsTo"]:
+    ) -> Optional["_CorsRule"]:
         if not json_data:
             return None
         return cls(
-            HostName=json_data.get("HostName"),
-            Protocol=json_data.get("Protocol"),
+            ExposedHeaders=json_data.get("ExposedHeaders"),
+            AllowedMethods=json_data.get("AllowedMethods"),
+            AllowedOrigins=json_data.get("AllowedOrigins"),
+            AllowedHeaders=json_data.get("AllowedHeaders"),
+            MaxAge=json_data.get("MaxAge"),
+            Id=json_data.get("Id"),
         )
 
 
 # work around possible type aliasing issues when variable has same name as a model
-_RedirectAllRequestsTo = RedirectAllRequestsTo
+_CorsRule = CorsRule

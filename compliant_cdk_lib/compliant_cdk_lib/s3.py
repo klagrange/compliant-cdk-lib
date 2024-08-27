@@ -11,7 +11,7 @@ from aws_cdk import (
 from constructs import Construct
 
 
-class BucketCompliant(s3.Bucket):
+class BucketCompliant(Construct):
     @staticmethod
     def validate_props(props: s3.BucketProps) -> None:
         # List of properties that cannot be overridden
@@ -67,19 +67,19 @@ class BucketCompliant(s3.Bucket):
         self.bucket.grant_write(grantee)
 
 
-class CdkPyStack(Stack):
-    def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
-        super().__init__(scope, construct_id, **kwargs)
+# class CdkPyStack(Stack):
+#     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
+#         super().__init__(scope, construct_id, **kwargs)
 
-        bucket_props = s3.BucketProps(
-            bucket_name="dino-my-bucket",
-            lifecycle_rules=[
-                s3.LifecycleRule(id="rule1", expiration=Duration.days(30))
-            ],
-        )
-        bucket = s3.Bucket.Compliant(self, "CompliantBucket", bucket_props)
+#         bucket_props = s3.BucketProps(
+#             bucket_name="dino-my-bucket",
+#             lifecycle_rules=[
+#                 s3.LifecycleRule(id="rule1", expiration=Duration.days(30))
+#             ],
+#         )
+#         bucket = BucketCompliant(self, "CompliantBucketXXX", bucket_props)
 
-        bucket.grant_read_write(iam.AccountRootPrincipal())
+#         bucket.grant_read_write(iam.AccountRootPrincipal())
 
 
 # # Create an instance of the CDK app

@@ -6,6 +6,11 @@ POETRY := poetry run
 SRC_DIR := .
 TEST_DIR := tests
 
+# Run Unit Tests
+test:
+	@echo "Running tests..."
+	$(POETRY) pytest $(TEST_DIR)
+
 # Run Black formatter
 format:
 	@echo "Running Black..."

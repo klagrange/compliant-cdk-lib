@@ -1,9 +1,15 @@
 # Define the Python interpreter and Poetry command
 PYTHON := poetry run python
 POETRY := poetry run
+HOOK_TYPE_ARN := arn:aws:cloudformation:ap-southeast-1:706041656585:type/hook/MyCompany-Testing-MyTestHook
 
 # Define directories to be checked/formatted
 SRC_DIR := src
+
+# Run Unit tests
+test:
+	@echo "Running tests..."
+	$(POETRY) pytest $(SRC_DIR)
 
 # Run Black formatter
 format:
@@ -23,6 +29,15 @@ clean:
 	@echo "Cleaning up..."
 	find . -type d -name "__pycache__" -exec rm -r {} +
 	find . -type f -name "*.pyc" -exec rm -f {} +
+
+register-dry-run:
+	cfn submit --dry-run
+
+register:
+	cfn submit --set-default
+
+verify-hooks:
+	aws cloudformation list-types
 
 # Help command to list all available commands
 help:

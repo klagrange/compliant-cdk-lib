@@ -8,6 +8,8 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
+cloudformation-cli-python-lib = "^2.1.18"
+pytest = "^8.3.2"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.1"
